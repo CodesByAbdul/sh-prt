@@ -21,6 +21,4 @@ void user_input(char *input, size_t len)
 
 	input[strcspn(input, "\n")] = '\0';
 
-	printf("You entered: %s\n", input);
-
 }
