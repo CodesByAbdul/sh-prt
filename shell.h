@@ -6,8 +6,11 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdbool.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 void prompt(void);
 void user_input(char *input, size_t len);
+void exec_input(char *input);
 
 #endif
