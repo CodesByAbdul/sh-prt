@@ -1,6 +1,6 @@
 #include "shell.h"
 
-int main(void)
+int ppid(void)
 {
         pid_t process_id;
         process_id = getppid();
