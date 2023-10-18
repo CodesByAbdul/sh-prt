@@ -6,6 +6,7 @@
  * CodesByAbdul
  * Return: 0
  */
+extern char **environ;
 
 void exec_input(char *input)
 {
@@ -28,7 +29,7 @@ void exec_input(char *input)
 	{
 		snprintf(command_path, sizeof(command_path), "bin/%s", input);
 
-		execve(command_path, argv, NULL);
+		execve(command_path, argv, environ);
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
