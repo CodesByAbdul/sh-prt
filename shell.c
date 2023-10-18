@@ -8,7 +8,7 @@
 
 int main(void)
 {
-	char input[120];
+	char input[256];
 	char **env_copy = environment();
 
 	while (true)
