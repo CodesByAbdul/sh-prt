@@ -9,14 +9,16 @@
 int main(void)
 {
 	char input[120];
+	char **env_copy = environment();
 
 	while (true)
 	{
 		prompt();
 		user_input(input, sizeof(input));
-		exec_input(input);
+		exec_input(input, env_copy);
 	}
 
-	free(input);
+	free_env(env_copy);
+
 	return (0);
 }

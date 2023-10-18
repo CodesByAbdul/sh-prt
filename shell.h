@@ -11,6 +11,9 @@
 
 void prompt(void);
 void user_input(char *input, size_t len);
-void exec_input(char *input);
+void exec_input(char *input, char **envp);
+char **environment(void);
+int env_size(void);
+void free_env(char **env);
 
 #endif
