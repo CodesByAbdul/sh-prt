@@ -27,7 +27,7 @@ void exec_input(char *input)
 	}
 	else if (process_id == 0)
 	{
-		snprintf(command_path, sizeof(command_path), "bin/%s", input);
+		snprintf(command_path, sizeof(command_path), "/bin/%s", input);
 
 		execve(command_path, argv, environ);
 		perror("execve");
