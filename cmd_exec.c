@@ -18,9 +18,9 @@ void exec_input(char *input)
 		exit(EXIT_FAILURE);
 	}
 	else if (process_id == 0)
-	{	
+	{
 		snprintf(command_path, sizeof(command_path), "bin/%s", input);
-		
+
 		execve(command_path, argv, NULL);
 		perror("execve");
 		exit(EXIT_FAILURE);
