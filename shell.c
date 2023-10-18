@@ -17,5 +17,6 @@ int main(void)
 		exec_input(input);
 	}
 
+	free(input);
 	return (0);
 }
