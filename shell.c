@@ -1,10 +1,16 @@
 #include "shell.h"
 
-int main (void)
+/**
+ * main - function to implement the shell
+ * CodesByAbdul
+ * Return: 0.
+ */
+
+int main(void)
 {
 	char input[120];
 
-	while(true)
+	while (true)
 	{
 		prompt();
 		user_input(input, sizeof(input));

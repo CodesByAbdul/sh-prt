@@ -1,4 +1,11 @@
 #include "shell.h"
+/**
+ * user_input - function to read command from the terminal
+ * @input: command from user
+ * @len: length of command
+ * CodesByAbdul
+ * Return: 0.
+ */
 
 void user_input(char *input, size_t len)
 {

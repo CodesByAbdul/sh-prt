@@ -1,5 +1,12 @@
 #include "shell.h"
 
+/**
+ * exec_input  - function to execute command
+ * @input: command to be executed
+ * CodesByAbdul
+ * Return: 0
+ */
+
 void exec_input(char *input)
 {
 	pid_t process_id;
