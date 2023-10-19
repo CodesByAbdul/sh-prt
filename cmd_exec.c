@@ -12,8 +12,10 @@ void exec_input(char *input, char **envp);
 void exec_input(char *input, char **envp)
 {
 	pid_t process_id;
-	char *token, *cpy_input, **argv = NULL;
-	int argc = 0, i, status;
+	char *token, *cpy_input;
+	char **argv = NULL;
+	int argc = 0;
+	int i, status;
 
 	cpy_input = strdup(input);
 	/* tokenization */
@@ -32,39 +34,87 @@ void exec_input(char *input, char **envp)
 
 	if (argc > 0)
 	{
-		process_id = fork();
-
-		if (process_id == -1)
+		if (strcmp(argv[0], "exit") == 0)
 		{
-			perror("fork");
-			exit(EXIT_FAILURE);
+			exit_shell(envp);
 		}
-		else if (process_id == 0)
+		else if (strchr(argv[0], '/') == NULL)
 		{
-			if (strchr(argv[0], '/') == NULL)
-			{
-				char command_path[256];
+			char *path_env = getenv("PATH");
 
-				snprintf(command_path, sizeof(command_path), "/bin/%s", argv[0]);
-				execve(command_path, argv, envp);
-			}
+			if (path_env != NULL)
+			{
+				char *path = strtok(path_env, ":");
+				int command_found = 0;
+
+				while (path != NULL)
+				{
+					char command_path[256];
+
+					snprintf(command_path, sizeof(command_path), "%s/%s", path, argv[0]);
+
+					if (access(command_path, X_OK) == 0)
+					{
+						process_id = fork();
+
+						if (process_id == -1)
+						{
+							perror("fork");
+							exit(EXIT_FAILURE);
+						}
+						else if (process_id == 0)
+						{
+							execve(command_path, argv, envp);
+							perror("execve");
+							exit(EXIT_FAILURE);
+						}
+						else
+						{
+							wait(&status);
+						}
+
+						command_found = 1;
+						break;
+					}
+
+					path = strtok(NULL, ":");
+				}
+
+				if (!command_found)
+				{
+					fprintf(stderr, "Command not found: %s\n", argv[0]);
+				}
 			else
 			{
-				execve(argv[0], argv, envp);
+				fprintf(stderr, "PATH environment variable is not set\n");
 			}
-			perror("execve");
-			exit(EXIT_FAILURE);
 		}
 		else
 		{
-			wait(&status);
+			process_id = fork();
+
+			if (process_id == -1)
+			{
+				perror("fork");
+				exit(EXIT_FAILURE);
+			}
+			else if (process_id == 0)
+			{
+				execve(argv[0], argv, envp);
+				perror("execve");
+				exit(EXIT_FAILURE);
+			}
+			else
+			{
+				wait(&status);
+			}
 		}
 	}
-
 	free(cpy_input);
 	for (i = 0; i < argc; i++)
 	{
 		free(argv[i]);
 	}
 	free(argv);
+	}
 }
