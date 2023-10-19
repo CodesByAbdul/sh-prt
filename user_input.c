@@ -17,7 +17,6 @@ void user_input(char *input, size_t len)
 	{
 		if (feof(stdin))
 		{
-			printf("Exiting abshell ...\n");
 			exit(EXIT_SUCCESS);
 		}
 		else

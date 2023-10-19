@@ -11,10 +11,8 @@
 void exec_input(char *input, char **envp)
 {
 	pid_t process_id;
-	char *token, *cpy_input;
-	char **argv = NULL; /* Array to hold arguments */
-	int argc = 0;
-	int i, status;
+	char *token, *cpy_input, **argv = NULL;
+	int argc = 0, i, status;
 
 	cpy_input = strdup(input);
 	/* tokenization */
