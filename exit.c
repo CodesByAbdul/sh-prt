@@ -5,6 +5,7 @@
  * @env_copy: variable for the environment
  * Return: 0
  */
+void exit_shell(char **env_copy);
 
 void exit_shell(char **env_copy)
 {

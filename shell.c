@@ -2,11 +2,10 @@
 
 /**
  * main - function to implement the shell
- * @argc: argument count
- * @argv: argument string
  * CodesByAbdul
  * Return: 0.
  */
+int main(void);
 
 int main(void)
 {

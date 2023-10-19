@@ -10,6 +10,7 @@ static char *environ[] = {
  * environment - function that gets the input environment
  * Return: copy Always
  */
+char **environment(void);
 
 char **environment(void)
 {
@@ -27,6 +28,7 @@ char **environment(void)
  * env_size - size of the environment
  * Return: i Always
  */
+int env_size(void);
 
 int env_size(void)
 {
@@ -44,6 +46,7 @@ int env_size(void)
  * @env: variable to free
  * Return: 0
  */
+void free_env(char **env);
 
 void free_env(char **env)
 {

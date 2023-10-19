@@ -15,5 +15,6 @@ void exec_input(char *input, char **envp);
 char **environment(void);
 int env_size(void);
 void free_env(char **env);
+void exit_shell(char **env_copy);
 
 #endif

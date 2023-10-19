@@ -6,6 +6,7 @@
  * CodesByAbdul
  * Return: 0.
  */
+void user_input(char *input, size_t len);
 
 void user_input(char *input, size_t len)
 {
