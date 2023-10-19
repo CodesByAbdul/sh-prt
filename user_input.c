@@ -28,7 +28,7 @@ void user_input(char *input, size_t len)
 
 	if (input[nread - 1] == '\n')
 	{
-		input[nread -1] = '\0';
+		input[nread - 1] = '\0';
 		nread--;
 	}
 
