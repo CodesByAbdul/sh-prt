@@ -7,6 +7,7 @@
  * CodesByAbdul
  * Return: 0
  */
+void exec_input(char *input, char **envp);
 
 void exec_input(char *input, char **envp)
 {
