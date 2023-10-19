@@ -16,5 +16,7 @@ char **environment(void);
 int env_size(void);
 void free_env(char **env);
 void exit_shell(char **env_copy);
+void print_environment(char **env);
+char *custom_getline(void);
 
 #endif

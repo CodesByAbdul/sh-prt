@@ -38,6 +38,10 @@ void exec_input(char *input, char **envp)
 		{
 			exit_shell(envp);
 		}
+		else if (strcmp(argv[0], "env") == 0)
+		{
+			print_environment(envp);
+		}
 		else if (strchr(argv[0], '/') == NULL)
 		{
 			char *path_env = getenv("PATH");

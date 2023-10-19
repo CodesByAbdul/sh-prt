@@ -16,7 +16,14 @@ int main(void)
 	{
 		prompt();
 		user_input(input, sizeof(input));
-		exec_input(input, env_copy);
+		if (strcmp(input, "env") == 0)
+		{
+			print_environment(env_copy);
+		}
+		else
+		{
+			exec_input(input, env_copy);
+		}
 	}
 
 	free_env(env_copy);
