@@ -65,4 +65,5 @@ char *custom_getline(void)
 	{
 		return (NULL);  /* Empty line */
 	}
+	free(line);
 }

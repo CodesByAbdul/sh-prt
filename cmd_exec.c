@@ -88,6 +88,8 @@ void exec_input(char *input, char **envp)
 				{
 					fprintf(stderr, "Command not found: %s\n", argv[0]);
 				}
+			
+			}
 			else
 			{
 				fprintf(stderr, "PATH environment variable is not set\n");
@@ -113,12 +115,12 @@ void exec_input(char *input, char **envp)
 				wait(&status);
 			}
 		}
-	}
-	free(cpy_input);
-	for (i = 0; i < argc; i++)
-	{
-		free(argv[i]);
-	}
-	free(argv);
+	
+		free(cpy_input);
+		for (i = 0; i < argc; i++)
+		{
+			free(argv[i]);
+		}
+		free(argv);
 	}
 }

@@ -8,25 +8,38 @@ static char *environ[] = {
 
 /**
  * environment - function that gets the input environment
- * Return: copy Always
+ * Return: copy of the environment
  */
 char **environment(void);
 
 char **environment(void)
 {
-	char **copy = (char **)malloc(sizeof(char *) * (env_size() + 1));
+	int size = env_size();
+	char **copy = (char **)malloc(sizeof(char *) * (size + 1));
 	int i;
 
-	for (i = 0; environ[i] != NULL; i++)
-		copy[i] = strdup(environ[i]);
-	copy[i] = NULL;
+	if (copy == NULL)
+	{
+		return (NULL);
+	}
 
+	for (i = 0; environ[i] != NULL; i++)
+	{
+		copy[i] = strdup(environ[i]);
+		if (copy[i] == NULL)
+		{
+			free_env(copy);
+			return (NULL);
+		}
+	}
+	copy[size] = NULL;
 	return (copy);
 }
 
+
 /**
  * env_size - size of the environment
- * Return: i Always
+ * Return: the size of the environment
  */
 int env_size(void);
 
@@ -52,6 +65,10 @@ void free_env(char **env)
 {
 	int i;
 
+	if (env == NULL)
+	{
+		return;
+	}
 	for (i = 0; env[i] != NULL; i++)
 		free(env[i]);
 	free(env);

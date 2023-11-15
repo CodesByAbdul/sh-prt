@@ -10,5 +10,5 @@ void prompt(void);
 
 void prompt(void)
 {
-	printf("(CodesByAbdul Shell)>\n$ ");
+	printf("(CodesByAbdul Shell)\n$ ");
 }
