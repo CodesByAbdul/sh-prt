@@ -5,18 +5,19 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <stdbool.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void prompt(void);
-void user_input(char *input, size_t len);
-void exec_input(char *input, char **envp);
-char **environment(void);
-int env_size(void);
-void free_env(char **env);
-void exit_shell(char **env_copy);
-void print_environment(char **env);
-char *custom_getline(void);
+#define MAX_INPUT_SIZE 1024
+#define MAX_ARGS 64
 
-#endif
+/* function prototypes */
+int _putchar (char c);
+int _print(char *str);
+void prompt(void);
+char *user_input(void);
+char **input_token(char *input);
+void _environment();
+void exec_input(char **args);
+
+#endif /* SHELL_H */

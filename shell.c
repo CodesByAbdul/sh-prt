@@ -9,24 +9,23 @@ int main(void);
 
 int main(void)
 {
-	char input[256];
-	char **env_copy = environment();
+	char *input;
+	char **args;
 
-	while (true)
+	while (1)
 	{
 		prompt();
-		user_input(input, sizeof(input));
-		if (strcmp(input, "env") == 0)
-		{
-			print_environment(env_copy);
-		}
-		else
-		{
-			exec_input(input, env_copy);
-		}
-	}
+		input = user_input();
+		args = input_token(input);
 
-	free_env(env_copy);
+		if (args[0] != NULL)
+		{
+			exec_input(args);
+		}
+		/* cleanup */
+		free(input);
+		free(args);
+	}
 
 	return (0);
 }

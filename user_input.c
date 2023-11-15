@@ -1,46 +1,25 @@
 #include "shell.h"
 /**
  * user_input - function to read command from the terminal
- * @input: command from user
- * @len: length of command
- * CodesByAbdul
  * Return: 0.
  */
-void user_input(char *input, size_t len);
+char *user_input(void);
 
-void user_input(char *input, size_t len)
+char *user_input(void)
 {
-	ssize_t nread;
-	char *cpy_input;
+	char *input = NULL;
+	size_t input_size = 0;
 
-	nread = getline(&input, &len, stdin);
-	if (nread == -1)
+	if (getline(&input, &input_size, stdin) == -1)
 	{
-		if (feof(stdin))
-		{
-			exit(EXIT_SUCCESS);
-		}
-		else
-		{
-			perror("getline");
-			exit(EXIT_FAILURE);
-		}
-	}
-
-	if (input[nread - 1] == '\n')
-	{
-		input[nread - 1] = '\0';
-		nread--;
-	}
-
-	cpy_input = malloc(nread + 1);
-	if (cpy_input == NULL)
-	{
-		perror("Memory allocation failed\n");
+		perror("getline");
+		free(input);
 		exit(EXIT_FAILURE);
 	}
 
-	strcpy(cpy_input, input);
+    /* Remove the newline character */
+	input[strcspn(input, "\n")] = '\0';
 
-	free(cpy_input);
+	return (input);
+
 }

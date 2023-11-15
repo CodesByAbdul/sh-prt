@@ -10,5 +10,6 @@ void prompt(void);
 
 void prompt(void)
 {
-	printf("(CodesByAbdul Shell)\n$ ");
+	if (isatty(0))
+		_print("(CodesByAbdul Shell)\n$ ");
 }

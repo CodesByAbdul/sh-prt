@@ -1,19 +1,15 @@
 #include "shell.h"
 
 /**
- * print_environment - function to print environment
- * @envp: environment command
- * Return: 0
+ * _environment - function for environment variables
  */
-void print_environment(char **env);
-
-void print_environment(char **env)
+void _environment(void)
 {
-	int i = 0;
+	char *env[] = {"PATH=/bin:/usr/bin", NULL};
 
-	while (env[i] != NULL)
+	if (execve(command, args, env) == -1)
 	{
-		printf("%s\n", env[i]);
-		i++;
+		perror("execve");
+		exit(EXIT_FAILURE);
 	}
 }
