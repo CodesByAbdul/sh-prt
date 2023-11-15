@@ -11,6 +11,8 @@ void exec_input(char **args);
 
 void exec_input(char **args)
 {
+	pid_t pid;
+
 	if (args[0] == NULL)
 	{
 		/* empty command, do nothing */
@@ -28,7 +30,7 @@ void exec_input(char **args)
 
 	_environment(); /* call the function to setup environment */
 
-	pid_t pid = fork();
+	pid = fork();
 
 	if (pid == -1)
 	{
@@ -45,9 +47,6 @@ void exec_input(char **args)
 
 		snprintf(command, sizeof(command), "%s%s", command_path, args[0]);
 
-		/* Setup environment */
-		char *env[] = {"PATH=/bin:/usr/bin", NULL};
-		/* You can customize the environment if needed */
 
 		/* Execute the command */
 		if (execve(command, args, env) == -1)

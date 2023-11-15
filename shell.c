@@ -1,31 +1,44 @@
 #include "shell.h"
 
 /**
- * main - function to implement the shell
- * CodesByAbdul
- * Return: 0.
+ * main - entry point
+ * @ac: arg count
+ * @av: arg vector
+ *
+ * Return: 0 on success, 1 on error
  */
-int main(void);
-
-int main(void)
+int main(int ac, char **av)
 {
-	char *input;
-	char **args;
+	info_t info[] = { INFO_INIT };
+	int fd = 2;
 
-	while (1)
+	asm ("mov %1, %0\n\t"
+		"add $3, %0"
+		: "=r" (fd)
+		: "r" (fd));
+
+	if (ac == 2)
 	{
-		prompt();
-		input = user_input();
-		args = input_token(input);
-
-		if (args[0] != NULL)
+		fd = open(av[1], O_RDONLY);
+		if (fd == -1)
 		{
-			exec_input(args);
+			if (errno == EACCES)
+				exit(126);
+			if (errno == ENOENT)
+			{
+				cstm_puts(av[0]);
+				cstm_puts(": 0: Can't open ");
+				cstm_puts(av[1]);
+				cstm_putchar('\n');
+				cstm_putchar(BUF_FLUSH);
+				exit(127);
+			}
+			return (EXIT_FAILURE);
 		}
-		/* cleanup */
-		free(input);
-		free(args);
+		info->readfd = fd;
 	}
-
-	return (0);
+	populate_env_list(info);
+	read_hist(info);
+	hsh(info, av);
+	return (EXIT_SUCCESS);
 }
